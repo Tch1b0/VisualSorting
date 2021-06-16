@@ -11,7 +11,11 @@ except:
     arg = "bubble"
 
 if arg == "-h" or arg == "--help": quit(utils.help())
-algorithm = utils.ALGORITHMS[arg]
+
+try:
+    algorithm = utils.ALGORITHMS[arg]
+except KeyError:
+    quit(help())
 
 field = Field(algorithm)
 field.shuffle()
