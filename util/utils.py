@@ -28,5 +28,6 @@ def help():
         "\nUsage: python VisualSorting [optional algorithm]\n",
         "\nAvailable algorithms:",
         "\n\tbubble",
-        "\n\tbogo\n"
+        "\n\tbogo",
+        "\n\tgnome\n"
         )
