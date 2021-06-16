@@ -1,8 +1,6 @@
-from field import Field
+from util import algorithms, utils, field
 import pygame
 from pygame.constants import QUIT
-import utils
-import random
 import sys
 
 try:
@@ -13,11 +11,11 @@ except:
 if arg == "-h" or arg == "--help": quit(utils.help())
 
 try:
-    algorithm = utils.ALGORITHMS[arg]
+    algorithm = algorithms.ALGORITHMS[arg]
 except KeyError:
     quit(help())
 
-field = Field(algorithm)
+field = field.Field(algorithm)
 field.shuffle()
 
 window = pygame.display.set_mode([500, 500])
@@ -33,5 +31,5 @@ while True:
     field.sort(steps=1)
     utils.draw(window, field.field, field.is_sorted())
 
-    pygame.display.update()
-    clock.tick(60)
+    pygame.display.update() # Update the window
+    clock.tick(60)          # Run a maximum of 60 times a second
