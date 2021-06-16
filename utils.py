@@ -1,13 +1,19 @@
 import pygame
 
 RED = (250, 0, 0)
+GREEN = (0, 250, 0)
 
-def draw(screen, vals):
+def draw(screen, items: list, solved=False):
+    if solved == True:
+        color = GREEN
+    else:
+        color = RED
+
     i = 1
-    for val in vals:
+    for val in items:
         pygame.draw.rect(
             screen,
-            RED,
+            color,
             (
                 i,       # From x 
                 500-val, # From y
@@ -17,15 +23,23 @@ def draw(screen, vals):
         )
         i += 1
 
-def bubble_sort(items):
+def help():
+    print(
+        "\nUsage: python VisualSorting [optional algorithm]\n",
+        "\nAvailable algorithms:",
+        "\n\tbubble\n"
+        )
 
-    for i in range(1, len(items) - 1):
-
+def bubble_sort(items: list):
+    for i in range(len(items) - 1):
         left = items[i]
         right = items[i+1]
 
         if right < left:
             items[i] = right
             items[i+1] = left
-
     return items
+
+ALGORITHMS = {
+    "bubble": bubble_sort
+}
