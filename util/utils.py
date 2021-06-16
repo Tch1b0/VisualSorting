@@ -27,19 +27,6 @@ def help():
     print(
         "\nUsage: python VisualSorting [optional algorithm]\n",
         "\nAvailable algorithms:",
-        "\n\tbubble\n"
+        "\n\tbubble",
+        "\n\tbogo\n"
         )
-
-def bubble_sort(items: list):
-    for i in range(len(items) - 1):
-        left = items[i]
-        right = items[i+1]
-
-        if right < left:
-            items[i] = right
-            items[i+1] = left
-    return items
-
-ALGORITHMS = {
-    "bubble": bubble_sort
-}
