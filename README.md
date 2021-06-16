@@ -1,2 +1,2 @@
 # VisualSorting
-This is a Sorting-algorithm-visualizer made in pygame
+This is a sorting algorithm visualizer made in pygame
