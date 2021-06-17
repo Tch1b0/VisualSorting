@@ -7,6 +7,8 @@ This is a sorting algorithm visualizer made in pygame
 ```
 $ git clone https://github.com/Tch1b0/VisualSorting
 
+$ pip install pygame
+
 $ python VisualSorting [optional algorithm] [...options]
 ```
 The defualt algorithm is the `bubble sort`. 
