@@ -3,12 +3,17 @@ import pygame
 from pygame.constants import QUIT
 import sys
 
+limit = True
+
 try:
     arg = sys.argv[1]
 except:
     arg = "bubble"
 
-if arg == "-h" or arg == "--help": quit(utils.help())
+args = sys.argv
+
+if "-h" in args or "--help" in args: quit(utils.help())
+if "-nl" in args or "--nolimit" in args: limit = False
 
 try:
     algorithm = algorithms.ALGORITHMS[arg]
@@ -31,5 +36,5 @@ while True:
     field.sort(steps=1)
     utils.draw(window, field.field, field.is_sorted())
 
-    pygame.display.update() # Update the window
-    clock.tick(60)          # Run a maximum of 60 times a second
+    pygame.display.update()           # Update the window
+    if limit: clock.tick(60)          # Run a maximum of 60 times a second
