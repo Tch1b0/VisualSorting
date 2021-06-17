@@ -5,12 +5,14 @@ import sys
 
 limit = True
 
+# /Read args
+args = sys.argv
+
 try:
-    arg = sys.argv[1]
+    arg = args[1]
+    if arg.startswith("-"): raise Exception() # Go to except block
 except:
     arg = "bubble"
-
-args = sys.argv
 
 if "-h" in args or "--help" in args: quit(utils.help())
 if "-nl" in args or "--nolimit" in args: limit = False
@@ -18,7 +20,8 @@ if "-nl" in args or "--nolimit" in args: limit = False
 try:
     algorithm = algorithms.ALGORITHMS[arg]
 except KeyError:
-    quit(help())
+    quit(utils.help())
+# Read args/
 
 field = field.Field(algorithm)
 field.shuffle()
