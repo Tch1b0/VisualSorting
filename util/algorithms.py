@@ -30,8 +30,8 @@ def gnome_sort(items: list) -> list:
             item = items[item_index]
             for n in range(1, len(items)):
                 new_index = item_index - n
-                if items[new_index+1] > item and items[new_index-1] < item:
-                    print(items.pop(item_index))
+                if items[new_index+1] > item or items[new_index-1] < item:
+                    items.pop(item_index)
                     items.insert(new_index, item)
                     return items
 
