@@ -25,9 +25,12 @@ def draw(screen, items: list, solved=False):
 
 def help():
     print(
-        "\nUsage: python VisualSorting [optional algorithm]\n",
+        "\nUsage: python VisualSorting [optional algorithm] [...options]\n",
         "\nAvailable algorithms:",
         "\n\tbubble",
         "\n\tbogo",
-        "\n\tgnome\n"
+        "\n\tgnome\n",
+        "\nAvailable flags:",
+        "\n\t-nl --nolimit\tRemove the fps limit",
+        "\n\t-h  --help\tGet all available arguments\n"
         )
