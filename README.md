@@ -21,3 +21,7 @@ I am working on adding other algorithms
 - [x] Gnome sort
 - [ ] Quick sort
 - [ ] Merge sort
+
+## Requirements
+
+* `pygame` v2.0.1
