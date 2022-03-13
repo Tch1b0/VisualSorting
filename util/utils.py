@@ -55,7 +55,7 @@ def compare_alogrithms() -> dict[str, float]:
     del all_algorithms["gnome"]
     for k, v in all_algorithms.items():
         start = time.time()
-        field = Field(v, size=50000)
+        field = Field(v, size=500)
         field.shuffle()
         field.sort_now()
         end = time.time()
