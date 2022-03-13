@@ -4,6 +4,8 @@ import pygame
 from pygame.constants import QUIT
 import sys
 
+FPS = 60
+SIZE = 500
 limit = True
 
 # /Read args
@@ -18,7 +20,7 @@ else:
 if selected_algorithm == "all":
     algo_times = utils.compare_alogrithms()
     for k, v in algo_times.items():
-        print(f"{k}: {v} seconds")
+        print(f"{k} sort: {v} seconds")
     exit()
 
 if utils.any_in_list(["-h", "--help"], args):
@@ -27,10 +29,11 @@ if utils.any_in_list(["-h", "--help"], args):
 if utils.any_in_list(["-nl", "--nolimit"], args):
     limit = False
 
-field = field.Field(algorithms.ALGORITHMS[selected_algorithm])
+
+field = field.Field(algorithms.ALGORITHMS[selected_algorithm], size=SIZE)
 field.shuffle()
 
-window = pygame.display.set_mode([500, 500])
+window = pygame.display.set_mode([SIZE, SIZE])
 pygame.display.set_caption("Visual Sorting")
 clock = pygame.time.Clock()
 
@@ -46,7 +49,7 @@ def render():
 
     pygame.display.update()
     if limit:
-        clock.tick(60)
+        clock.tick(FPS)
 
 
 start = time.time()

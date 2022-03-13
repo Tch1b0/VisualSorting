@@ -21,9 +21,9 @@ def draw(screen, items: list, solved=False):
             color,
             (
                 i,       # From x
-                500-val,  # From y
+                len(items)-val,  # From y
                 1,       # width
-                500      # height
+                len(items)      # height
             )
         )
         i += 1
@@ -52,7 +52,6 @@ def compare_alogrithms() -> dict[str, float]:
     algorithm_times: dict[str, float] = {}
     all_algorithms = algorithms.ALGORITHMS.copy()
     del all_algorithms["bogo"]
-    del all_algorithms["gnome"]
     for k, v in all_algorithms.items():
         start = time.time()
         field = Field(v, size=500)
