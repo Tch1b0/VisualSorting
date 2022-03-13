@@ -31,6 +31,7 @@ field = field.Field(algorithms.ALGORITHMS[selected_algorithm])
 field.shuffle()
 
 window = pygame.display.set_mode([500, 500])
+pygame.display.set_caption("Visual Sorting")
 clock = pygame.time.Clock()
 
 
