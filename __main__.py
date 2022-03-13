@@ -15,6 +15,12 @@ if len(selected_algorithm) == 0:
 else:
     selected_algorithm = selected_algorithm[0]
 
+if selected_algorithm == "all":
+    algo_times = utils.compare_alogrithms()
+    for k, v in algo_times.items():
+        print(f"{k}: {v} seconds")
+    exit()
+
 if utils.any_in_list(["-h", "--help"], args):
     quit(utils.help())
 

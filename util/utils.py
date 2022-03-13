@@ -1,6 +1,8 @@
+import time
 import pygame
 
 from util import algorithms
+from util.field import Field
 
 RED = (0xfc, 0x00, 0x00)
 GREEN = (0x00, 0xfc, 0x00)
@@ -44,3 +46,19 @@ def help():
         "\n\t-nl --nolimit\tRemove the fps limit",
         "\n\t-h  --help\tGet all available arguments\n"
     )
+
+
+def compare_alogrithms() -> dict[str, float]:
+    algorithm_times: dict[str, float] = {}
+    all_algorithms = algorithms.ALGORITHMS.copy()
+    del all_algorithms["bogo"]
+    del all_algorithms["gnome"]
+    for k, v in all_algorithms.items():
+        start = time.time()
+        field = Field(v, size=50000)
+        field.shuffle()
+        field.sort_now()
+        end = time.time()
+        algorithm_times[k] = end - start
+
+    return algorithm_times

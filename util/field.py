@@ -21,3 +21,9 @@ class Field:
         for items in self.algorithm(self.field.copy()):
             self.field = items.copy()
             yield items
+
+    def sort_now(self):
+        for items in self.algorithm(self.field.copy()):
+            self.field = items
+
+        return self.field
