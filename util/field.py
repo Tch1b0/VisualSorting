@@ -1,21 +1,29 @@
 import random
+from typing import Callable, Iterator
+
 
 class Field:
-    def __init__(self, algorithm, size=500) -> None:
+    def __init__(self, algorithm: Callable[[list[int]], Iterator[list[int]]], size=500) -> None:
         self.field = [i for i in range(size)]
         self.algorithm = algorithm
-    
+
     def shuffle(self) -> None:
         random.shuffle(self.field)
 
     def is_sorted(self) -> bool:
-        for i in range(len(self.field)):
-            if self.field[i] != i: return False
+        for i in range(0, len(self.field) - 1):
+            x, y = self.field[i], self.field[i+1]
+            if x > y:
+                return False
         return True
 
-    def sort(self, steps=-1) -> None:
-        while steps != 0:
-            self.field = self.algorithm(self.field)
-            steps -= 1
+    def sort(self) -> Iterator[list[int]]:
+        for items in self.algorithm(self.field.copy()):
+            self.field = items.copy()
+            yield items
 
-            if steps < 1 and self.is_sorted(): return
+    def sort_now(self):
+        for items in self.algorithm(self.field.copy()):
+            self.field = items
+
+        return self.field

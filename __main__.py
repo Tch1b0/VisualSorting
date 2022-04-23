@@ -1,43 +1,62 @@
-from util import algorithms, utils, field
+import time
+from util import ALGORITHMS, Field, compare_alogrithms, draw, any_in_list, help
 import pygame
 from pygame.constants import QUIT
 import sys
 
+FPS = 60
+SIZE = 500
 limit = True
 
-# /Read args
-args = sys.argv
+args = sys.argv[1:]
 
-try:
-    arg = args[1]
-    if arg.startswith("-"): raise Exception() # Go to except block
-except:
-    arg = "bubble"
+selected_algorithm = [arg for arg in args if not arg.startswith("-")]
+if len(selected_algorithm) == 0:
+    selected_algorithm = "bubble"
+else:
+    selected_algorithm = selected_algorithm[0]
 
-if "-h" in args or "--help" in args: quit(utils.help())
-if "-nl" in args or "--nolimit" in args: limit = False
+if selected_algorithm == "all":
+    algo_times = compare_alogrithms()
+    for k, v in algo_times.items():
+        print(f"{k} sort: {v} seconds")
+    exit()
 
-try:
-    algorithm = algorithms.ALGORITHMS[arg]
-except KeyError:
-    quit(utils.help())
-# Read args/
+if any_in_list(["-h", "--help"], args):
+    quit(help())
 
-field = field.Field(algorithm)
+if any_in_list(["-nl", "--nolimit"], args):
+    limit = False
+
+
+field = Field(ALGORITHMS[selected_algorithm], size=SIZE)
 field.shuffle()
 
-window = pygame.display.set_mode([500, 500])
+window = pygame.display.set_mode([SIZE, SIZE])
+pygame.display.set_caption("Visual Sorting")
 clock = pygame.time.Clock()
 
-while True:
+
+def render():
     for event in pygame.event.get():
         if event.type == QUIT:
             quit(pygame.quit())
 
     window.fill((0, 0, 0))
-    
-    field.sort(steps=1)
-    utils.draw(window, field.field, field.is_sorted())
 
-    pygame.display.update()           # Update the window
-    if limit: clock.tick(60)          # Run a maximum of 60 times a second
+    draw(window, field.field, field.is_sorted())
+
+    pygame.display.update()
+    if limit:
+        clock.tick(FPS)
+
+
+start = time.time()
+for _ in field.sort():
+    render()
+end = time.time()
+
+print(f"Sorting took {round(end - start, 3)} seconds!")
+
+while True:
+    render()
