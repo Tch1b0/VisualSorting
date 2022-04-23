@@ -1,8 +1,5 @@
 import random
 from typing import Iterator
-from numpy import block
-
-from pkg_resources import yield_lines
 
 
 def is_sorted(items: list[int]) -> bool:
@@ -42,8 +39,8 @@ def gnome_sort(items: list[int]) -> Iterator[list[int]]:
         n = i
         while n != 0 and items[n - 1] > right:
             swap(items, n, n - 1)
-            yield items.copy()
             n -= 1
+        yield items.copy()
 
 
 def own_sort(items: list[int]) -> Iterator[list[int]]:
@@ -64,12 +61,8 @@ def own_sort(items: list[int]) -> Iterator[list[int]]:
         yield items.copy()
 
 
-ALGORITHMS = {
-    "bubble": bubble_sort,
-    "bogo": bogo_sort,
-    "gnome": gnome_sort,
-    "own": own_sort
-}
+ALGORITHMS = {k.split("_")[0]: v for k, v in locals().items()
+              if k.endswith("_sort") and callable(v)}
 
 if __name__ == "__main__":
     _items = [x for x in range(1, 500 + 1)]

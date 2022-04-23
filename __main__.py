@@ -1,5 +1,5 @@
 import time
-from util import algorithms, utils, field
+from util import ALGORITHMS, Field, compare_alogrithms, draw, any_in_list, help
 import pygame
 from pygame.constants import QUIT
 import sys
@@ -8,7 +8,6 @@ FPS = 60
 SIZE = 500
 limit = True
 
-# /Read args
 args = sys.argv[1:]
 
 selected_algorithm = [arg for arg in args if not arg.startswith("-")]
@@ -18,19 +17,19 @@ else:
     selected_algorithm = selected_algorithm[0]
 
 if selected_algorithm == "all":
-    algo_times = utils.compare_alogrithms()
+    algo_times = compare_alogrithms()
     for k, v in algo_times.items():
         print(f"{k} sort: {v} seconds")
     exit()
 
-if utils.any_in_list(["-h", "--help"], args):
-    quit(utils.help())
+if any_in_list(["-h", "--help"], args):
+    quit(help())
 
-if utils.any_in_list(["-nl", "--nolimit"], args):
+if any_in_list(["-nl", "--nolimit"], args):
     limit = False
 
 
-field = field.Field(algorithms.ALGORITHMS[selected_algorithm], size=SIZE)
+field = Field(ALGORITHMS[selected_algorithm], size=SIZE)
 field.shuffle()
 
 window = pygame.display.set_mode([SIZE, SIZE])
@@ -45,7 +44,7 @@ def render():
 
     window.fill((0, 0, 0))
 
-    utils.draw(window, field.field, field.is_sorted())
+    draw(window, field.field, field.is_sorted())
 
     pygame.display.update()
     if limit:
@@ -57,7 +56,7 @@ for _ in field.sort():
     render()
 end = time.time()
 
-print(f"Sorting took {end - start} seconds!")
+print(f"Sorting took {round(end - start, 3)} seconds!")
 
 while True:
     render()

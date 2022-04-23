@@ -1,8 +1,7 @@
 import time
 import pygame
 
-from util import algorithms
-from util.field import Field
+from util import Field, ALGORITHMS
 
 RED = (0xfc, 0x00, 0x00)
 GREEN = (0x00, 0xfc, 0x00)
@@ -20,10 +19,10 @@ def draw(screen, items: list, solved=False):
             screen,
             color,
             (
-                i,       # From x
+                i,               # From x
                 len(items)-val,  # From y
-                1,       # width
-                len(items)      # height
+                1,               # Width
+                len(items)       # Height
             )
         )
         i += 1
@@ -35,7 +34,7 @@ def any_in_list(search_items, target_items):
 
 def help():
     algos = ""
-    for algorithm in algorithms.ALGORITHMS.keys():
+    for algorithm in ALGORITHMS.keys():
         algos += f"\n\t{algorithm}"
     algos += "\n"
     print(
@@ -50,7 +49,7 @@ def help():
 
 def compare_alogrithms() -> dict[str, float]:
     algorithm_times: dict[str, float] = {}
-    all_algorithms = algorithms.ALGORITHMS.copy()
+    all_algorithms = ALGORITHMS.copy()
     del all_algorithms["bogo"]
     for k, v in all_algorithms.items():
         start = time.time()
