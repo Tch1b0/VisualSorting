@@ -43,6 +43,7 @@ def help():
         algos,
         "\nAvailable flags:",
         "\n\t-nl --nolimit\tRemove the fps limit",
+        "\n\t-cmp --compare\t Compare all algorithms",
         "\n\t-h  --help\tGet all available arguments\n"
     )
 
@@ -50,8 +51,9 @@ def help():
 def compare_alogrithms() -> dict[str, float]:
     algorithm_times: dict[str, float] = {}
     all_algorithms = ALGORITHMS.copy()
-    del all_algorithms["bogo"]
     for k, v in all_algorithms.items():
+        if k in ["bogo"]:
+            continue
         start = time.time()
         field = Field(v, size=500)
         field.shuffle()
@@ -60,3 +62,10 @@ def compare_alogrithms() -> dict[str, float]:
         algorithm_times[k] = end - start
 
     return algorithm_times
+
+
+def print_compared_algorithms() -> None:
+    algo_times = compare_alogrithms()
+    name_length = max(len(k) for k in algo_times.keys())
+    for k, v in algo_times.items():
+        print(f"{' '*(name_length-len(k))}{k} sort: {round(v, 3)} seconds")

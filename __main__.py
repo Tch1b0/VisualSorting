@@ -1,5 +1,5 @@
 import time
-from util import ALGORITHMS, Field, compare_alogrithms, draw, any_in_list, help
+from util import ALGORITHMS, Field, compare_alogrithms, draw, any_in_list, help, print_compared_algorithms
 import pygame
 from pygame.constants import QUIT
 import sys
@@ -21,6 +21,10 @@ if selected_algorithm == "all":
     for k, v in algo_times.items():
         print(f"{k} sort: {v} seconds")
     exit()
+
+if any_in_list(["-cmp", "--compare"], args):
+    print_compared_algorithms()
+    quit()
 
 if any_in_list(["-h", "--help"], args):
     quit(help())
