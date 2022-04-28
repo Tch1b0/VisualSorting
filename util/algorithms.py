@@ -61,12 +61,16 @@ def own_sort(items: list[int]) -> Iterator[list[int]]:
         yield items.copy()
 
 
+def insertion_sort(items: list[int]) -> Iterator[list[int]]:
+    for i, item in enumerate(items):
+        for j in range(0, i):
+            if items[j] > item:
+                items.pop(i)
+                items.insert(j, item)
+                break
+        yield items.copy()
+    yield items.copy()
+
+
 ALGORITHMS = {k.split("_")[0]: v for k, v in locals().items()
               if k.endswith("_sort") and callable(v)}
-
-if __name__ == "__main__":
-    _items = [x for x in range(1, 500 + 1)]
-    random.shuffle(_items)
-    for items in own_sort(_items.copy()):
-        assert len(
-            items) == 500, f"len(items) != 500; len(items) == {len(items)}"
