@@ -22,7 +22,7 @@ class Field:
             self.field = items.copy()
             yield items
 
-    def sort_now(self):
+    def sort_instantly(self):
         for items in self.algorithm(self.field.copy()):
             self.field = items
 

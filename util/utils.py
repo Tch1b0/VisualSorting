@@ -57,7 +57,7 @@ def compare_alogrithms() -> dict[str, float]:
         start = time.time()
         field = Field(v, size=500)
         field.shuffle()
-        field.sort_now()
+        field.sort_instantly()
         end = time.time()
         algorithm_times[k] = end - start
 
