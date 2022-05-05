@@ -16,12 +16,6 @@ if len(selected_algorithm) == 0:
 else:
     selected_algorithm = selected_algorithm[0]
 
-if selected_algorithm == "all":
-    algo_times = compare_alogrithms()
-    for k, v in algo_times.items():
-        print(f"{k} sort: {v} seconds")
-    exit()
-
 if any_in_list(["-cmp", "--compare"], args):
     print_compared_algorithms()
     quit()

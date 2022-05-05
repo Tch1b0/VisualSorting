@@ -25,6 +25,8 @@ I am working on adding other algorithms
 -   [x] Bubble sort
 -   [x] Bogo sort
 -   [x] Gnome sort
+-   [x] Insertion sort
+-   [x] Selection sort
 -   [ ] Quick sort
 -   [ ] Merge sort
 

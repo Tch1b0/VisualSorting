@@ -65,7 +65,7 @@ def compare_alogrithms() -> dict[str, float]:
 
 
 def print_compared_algorithms() -> None:
-    algo_times = compare_alogrithms()
-    name_length = max(len(k) for k in algo_times.keys())
-    for k, v in algo_times.items():
-        print(f"{' '*(name_length-len(k))}{k} sort: {round(v, 3)} seconds")
+    algo_times = sorted(compare_alogrithms().items(), key=lambda x: x[1])
+    name_length = max(len(k) for k, _ in algo_times)
+    for i, [k, v] in enumerate(algo_times):
+        print(f"{i+1}. {' '*(name_length-len(k))}{k} sort: {round(v, 3)} seconds")
