@@ -32,4 +32,4 @@ I am working on adding other algorithms
 
 ## Requirements
 
--   `pygame` v2.0.1
+-   `pygame` v2.0.2
