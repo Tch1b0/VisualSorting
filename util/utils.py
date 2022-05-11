@@ -32,22 +32,6 @@ def any_in_list(search_items, target_items):
     return any([x in search_items for x in target_items])
 
 
-def help():
-    algos = ""
-    for algorithm in ALGORITHMS.keys():
-        algos += f"\n\t{algorithm}"
-    algos += "\n"
-    print(
-        "\nUsage: python VisualSorting [optional algorithm] [...options]\n",
-        "\nAvailable algorithms:",
-        algos,
-        "\nAvailable flags:",
-        "\n\t-nl --nolimit\tRemove the fps limit",
-        "\n\t-cmp --compare\t Compare all algorithms",
-        "\n\t-h  --help\tGet all available arguments\n"
-    )
-
-
 def compare_alogrithms() -> dict[str, float]:
     algorithm_times: dict[str, float] = {}
     all_algorithms = ALGORITHMS.copy()

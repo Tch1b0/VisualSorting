@@ -1,31 +1,46 @@
 import time
-from util import ALGORITHMS, Field, compare_alogrithms, draw, any_in_list, help, print_compared_algorithms
+from util import ALGORITHMS, Field, draw, print_compared_algorithms
 import pygame
 from pygame.constants import QUIT
 import sys
+
+from util.cli import Cli
 
 FPS = 60
 SIZE = 500
 limit = True
 
-args = sys.argv[1:]
+cli = Cli(sys.argv[1:])
 
-selected_algorithm = [arg for arg in args if not arg.startswith("-")]
-if len(selected_algorithm) == 0:
-    selected_algorithm = "bubble"
-else:
-    selected_algorithm = selected_algorithm[0]
+selected_algorithm: str = "bubble"
 
-if any_in_list(["-cmp", "--compare"], args):
+
+@cli.argument(1, "Select an algorithm")
+def select_algorithm(algorithm: str):
+    global selected_algorithm
+    selected_algorithm = algorithm
+
+
+@cli.flag("-cmp", "--compare", "Compare all algorithms")
+def compare_algorithms():
     print_compared_algorithms()
     quit()
 
-if any_in_list(["-h", "--help"], args):
-    quit(help())
 
-if any_in_list(["-nl", "--nolimit"], args):
+@cli.flag("-h", "--help", "Display help")
+def show_help():
+    print(cli)
+    print("\nAvailable algorithms:", *ALGORITHMS.keys(), sep="\n\t")
+    quit()
+
+
+@cli.flag("-nl", "--no-limit", "Remove the limit of the Framerate")
+def remove_limit():
+    global limit
     limit = False
 
+
+cli.execute()
 
 field = Field(ALGORITHMS[selected_algorithm], size=SIZE)
 field.shuffle()
