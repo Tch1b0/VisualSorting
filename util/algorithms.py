@@ -1,5 +1,5 @@
 import random
-from typing import Iterator
+from typing import Callable, Iterator
 
 
 def is_sorted(items: list[int]) -> bool:
@@ -92,5 +92,6 @@ def selection_sort(items: list[int]) -> Iterator[list[int]]:
         yield items.copy()
 
 
+ALGORITHMS: dict[str, Callable[[list[int]], Iterator[list[int]]]]
 ALGORITHMS = {k.split("_")[0]: v for k, v in locals().items()
               if k.endswith("_sort") and callable(v)}

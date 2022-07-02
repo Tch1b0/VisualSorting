@@ -1,4 +1,5 @@
 import time
+from typing import Any
 import pygame
 
 from util import Field, ALGORITHMS
@@ -28,7 +29,7 @@ def draw(screen, items: list, solved=False):
         i += 1
 
 
-def any_in_list(search_items, target_items):
+def any_in_list(search_items: list[Any], target_items: list[Any]) -> bool:
     return any([x in search_items for x in target_items])
 
 

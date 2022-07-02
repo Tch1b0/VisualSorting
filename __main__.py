@@ -1,4 +1,5 @@
 import time
+from typing_extensions import Never
 from util import ALGORITHMS, Field, draw, print_compared_algorithms
 import pygame
 from pygame.constants import QUIT
@@ -16,26 +17,26 @@ selected_algorithm: str = "bubble"
 
 
 @cli.argument(1, "Select an algorithm")
-def select_algorithm(algorithm: str):
+def select_algorithm(algorithm: str) -> None:
     global selected_algorithm
     selected_algorithm = algorithm
 
 
 @cli.flag("-cmp", "--compare", "Compare all algorithms")
-def compare_algorithms():
+def compare_algorithms() -> Never:
     print_compared_algorithms()
     quit()
 
 
 @cli.flag("-h", "--help", "Display help")
-def show_help():
+def show_help() -> Never:
     print(cli)
     print("\nAvailable algorithms:", *ALGORITHMS.keys(), sep="\n\t")
     quit()
 
 
 @cli.flag("-nl", "--no-limit", "Remove the limit of the Framerate")
-def remove_limit():
+def remove_limit() -> None:
     global limit
     limit = False
 
@@ -50,7 +51,7 @@ pygame.display.set_caption("Visual Sorting")
 clock = pygame.time.Clock()
 
 
-def render():
+def render() -> None:
     for event in pygame.event.get():
         if event.type == QUIT:
             quit(pygame.quit())

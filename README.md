@@ -9,7 +9,7 @@ This is a sorting algorithm visualizer made in pygame
 ```
 $ git clone https://github.com/Tch1b0/VisualSorting
 
-$ pip install pygame
+$ pip install -r ./VisualSorting/requirements.txt
 
 $ python VisualSorting [optional algorithm] [...options]
 ```
