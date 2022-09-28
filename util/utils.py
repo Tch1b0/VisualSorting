@@ -1,11 +1,11 @@
 import time
-from typing import Any
+from typing import Any, Callable
 import pygame
 
 from util import Field, ALGORITHMS
 
-RED = (0xfc, 0x00, 0x00)
-GREEN = (0x00, 0xfc, 0x00)
+RED = (0xFC, 0x00, 0x00)
+GREEN = (0x00, 0xFC, 0x00)
 
 
 def draw(screen, items: list, solved=False):
@@ -19,12 +19,7 @@ def draw(screen, items: list, solved=False):
         pygame.draw.rect(
             screen,
             color,
-            (
-                i,               # From x
-                len(items)-val,  # From y
-                1,               # Width
-                len(items)       # Height
-            )
+            (i, len(items) - val, 1, len(items)),  # From x  # From y  # Width  # Height
         )
         i += 1
 
@@ -54,3 +49,13 @@ def print_compared_algorithms() -> None:
     name_length = max(len(k) for k, _ in algo_times)
     for i, [k, v] in enumerate(algo_times):
         print(f"{i+1}. {' '*(name_length-len(k))}{k} sort: {round(v, 3)} seconds")
+
+
+def compute_time(compute_text: Callable[[float], str]) -> Callable:
+    def inner(timed_func: Callable):
+        start_time = time.time()
+        timed_func()
+        end_time = time.time()
+        print(compute_text(end_time - start_time))
+
+    return inner

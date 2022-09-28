@@ -6,6 +6,7 @@ from pygame.constants import QUIT
 import sys
 
 from util.cli import Cli
+from util.utils import compute_time
 
 FPS = 60
 SIZE = 500
@@ -65,12 +66,11 @@ def render() -> None:
         clock.tick(FPS)
 
 
-start = time.time()
-for _ in field.sort():
-    render()
-end = time.time()
+@compute_time(lambda time: f"Sorting took {round(time, 3)} seconds!")
+def main_sort():
+    for _ in field.sort():
+        render()
 
-print(f"Sorting took {round(end - start, 3)} seconds!")
 
 while True:
     render()
