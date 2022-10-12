@@ -1,10 +1,12 @@
-import time
-from typing_extensions import Never
-from util import ALGORITHMS, Field, draw, print_compared_algorithms
+import os
+
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
+
 import pygame
 from pygame.constants import QUIT
 import sys
-
+from typing_extensions import Never
+from util import ALGORITHMS, Field, draw, print_compared_algorithms
 from util.cli import Cli
 from util.utils import compute_time
 
@@ -43,6 +45,10 @@ def remove_limit() -> None:
 
 
 cli.execute()
+
+if not (selected_algorithm in ALGORITHMS.keys()):
+    print(f'"{selected_algorithm}" is not a valid algorithm')
+    quit()
 
 field = Field(ALGORITHMS[selected_algorithm], size=SIZE)
 field.shuffle()
