@@ -14,6 +14,7 @@ FPS = 60
 SIZE = 500
 limit = True
 
+# create a new cli object and pass the passed arguments except the first one
 cli = Cli(sys.argv[1:])
 
 selected_algorithm: str = "bubble"
@@ -59,6 +60,10 @@ clock = pygame.time.Clock()
 
 
 def render() -> None:
+    """
+    render one frame of the game using pygame
+    """
+
     for event in pygame.event.get():
         if event.type == QUIT:
             quit(pygame.quit())
@@ -78,5 +83,6 @@ def main_sort():
         render()
 
 
+# keep rendering after the sorting is done
 while True:
     render()
